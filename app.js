@@ -20,7 +20,7 @@ app.use(express.static("public"));
 
 //Creating route
 app.get("/", function (req, res) {
-  res.render("home",{startingContent:homeStartingContent });
+  res.render("home", { startContent: homeStartingContent });
 });
 
 app.listen(3000, function () {
