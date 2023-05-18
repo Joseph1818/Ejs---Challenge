@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
-var posts = [];
+let posts = [];
 
 const homeStartingContent =
   "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -22,9 +22,12 @@ app.use(express.static("public"));
 
 //Creating route
 app.get("/", function (req, res) {
-  res.render("home", { startContent: homeStartingContent });
+  res.render("home", {
+    startContent: homeStartingContent,
+    posts: posts,
+  });
   // Line bellow console log our array to hyper
-  console.log(posts);
+  // console.log(posts);
 });
 // This methode get the value from app.js and print it to the about.ejs using ejs template value
 app.get("/about", function (req, res) {
@@ -48,9 +51,23 @@ app.post("/compose", function (req, res) {
   // console.log(composeValue);
   // This line of code bellow send the value of post into the "posts array declared above".
   posts.push(composeValue);
-
   // res.redirect send our user back to the home page after
   res.redirect("/");
+});
+
+// Route parameters
+app.get("/posts/:postName", function (req, res) {
+  // console.log(req.params.postName);
+  let requestTitle = req.params.postName;
+  // The code bellow check if the store title match with the request by using /posts/+ "name of the title entered"
+  posts.forEach(function (post) {
+    let storeTitle = post.postTitle;
+    if (storeTitle === requestTitle) {
+      console.log("Match found");
+    } else {
+      return "Not a Match";
+    }
+  });
 });
 
 app.listen(3000, function () {
