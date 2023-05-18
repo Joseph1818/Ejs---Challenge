@@ -1,10 +1,25 @@
 <%- include('partials/header'); -%>
 
-    <h1>Compose</h1>
-    <input type="text" class="input botton" placeholder="Type here">
-    <input type="submit" class="submit-button" value="Push">
 
+    <!-- Placing a form help to send the submit button do a post request to the /compose root.
+action : is where the message go to
+method: post do the action of sending -->
+    <form class="" action="/compose" method="post">
 
+        <h1>Compose</h1>
+        <!-- in order to send a file, your input has to have a name -->
+        <label for="postTitle">Title</label>
+        <br>
+        <input type="text" name="postTitle" placeholder="Compose here" size="100">
+        <br />
+        <br />
+        <label for="postPostSection">Post</label>
+        <br>
+        <textarea rows="5" cols="100" name="postPostSection" placeholder="Enter text"></textarea>
+        <br />
+        <input type="submit" class="submit-button" value="Push">
+
+    </form>
 
 
 
