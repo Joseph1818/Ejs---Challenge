@@ -20,7 +20,8 @@
             <%= post.postTitle %>
         </h1>
         <p>
-            <%= post.postPostSection %>
+            <%= post.postPostSection.substring(0, 100 + " ..." ) %>
+                <a href="/post/<&=post.postTitle %>">Read more</a>
         </p>
         <% }) %>
 

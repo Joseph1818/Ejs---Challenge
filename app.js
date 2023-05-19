@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 let posts = [];
 
@@ -58,14 +59,18 @@ app.post("/compose", function (req, res) {
 // Route parameters
 app.get("/posts/:postName", function (req, res) {
   // console.log(req.params.postName);
-  let requestTitle = req.params.postName;
+  let requestTitle = _.lowerCase(req.params.postName);
   // The code bellow check if the store title match with the request by using /posts/+ "name of the title entered"
+
   posts.forEach(function (post) {
-    let storeTitle = post.postTitle;
+    // With use of Lodash facility to convert string on small letter
+    let storeTitle = _.lowerCase(post.postTitle);
     if (storeTitle === requestTitle) {
-      console.log("Match found");
+      res.render("post", {
+        title: postTitle,
+        content: postPostSection,
+      });
     } else {
-      return "Not a Match";
     }
   });
 });
